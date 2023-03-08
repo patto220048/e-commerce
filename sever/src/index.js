@@ -7,28 +7,16 @@ const app = express()
 const PORT = process.env.PORT || 8000
 const route = require('./route');
 
-const corsConfig = {
-    origin: 'http://localhost:3000',
-    credentials: true,
-  }
 
 // app use libraries
-app.use(cors(corsConfig))
+app.use(cors())
 app.use(morgan('combined'))
 app.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded())
-// app.use(function (req, res, next) {
-//     //Enabling CORS
-//     res.header('Access-Control-Allow-Credentials', true);
-//     // res.header("Access-Control-Allow-Origin", "*")
-//     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization");
-//     next();
-//     });
 
 // connect to database
-const db = require('./db')
+const db = require('./database')
 db.connect()
 
 // app listening on port

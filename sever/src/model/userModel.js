@@ -4,84 +4,43 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const User = new  Schema({
-    email :{
-        type: String,
-        required: true,
-        lowcase: true,
+
+    email:{
+        type:String,
+        require : true,
         unique: true,
     },
-    password : {
+    password :{
         type: String,
-        required: true,
-    },
-    username : {
-        required: true,
-        unique: true,
-        type: String,
-        maxlength: 50
-    },
-    decs:{
-        type: String,
-        maxlength: 50
-    },
-    region:{
-        type: String,
-        maxlength: 50
-    },
-    age: {
-        type: Number,
+        require:true,
+
     }
     ,
-    friend:{
-        type: Array,
-        default : [],
-    },
-    friendUser: {
-        type: Array,
-        default : [],
-    },
-    admin:{
+    admin : {
         type:Boolean,
         default: false,
     },
-    userImg:{
-        type: String,
+    supplier: {
+        type:Boolean,
+        default: false,
     },
-    userCoverImg:{
+    fullname : {
         type: String,
     },
     follower :{
         type: Array,
-        default: [],
-    },
-    flowing:{
+        default:[]
+    }
+    ,
+    follwing :{
         type: Array,
-        default: [],    
-    },
- 
-    followUser:{
-        type:Number,
+        default:[]
+    }
+    ,
+    countProduct : {
+        type: Number,
         default: 0,
-    }
-    ,
-    fromGoogle:{
-        type:Boolean,
-        default: false
-
     },
-    emailVerified :{
-        type:Boolean,
-        default: false
-    }
-    ,
-    postCount:{
-        type:Number,
-        default: 0
-    }
-    
-
-
-
 
     
     
@@ -89,7 +48,7 @@ const User = new  Schema({
 
 
 
-module.exports = mongoose.model('users', User )
+module.exports = mongoose.model('user', User )
 
 
 

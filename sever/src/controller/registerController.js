@@ -3,19 +3,19 @@ const User = require('../model/userModel')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
-class loginController{
+class registerController{
 
     //[POST] /api/signup
    async signup(req, res, next){
         try {
-            
             const salt = bcrypt.genSaltSync(10);
             const hash = bcrypt.hashSync(req.body.password, salt);
             const newUser = new User({...req.body, password:hash})
 
             const token = jwt.sign({
                 id:newUser._id,
-                admin:newUser.admin},
+                admin:newUser.admin,
+                supplier : newUser.supplier},
                 process.env.JWT_PW,
                 { expiresIn: '1d' })
             const {password, ...other} = newUser._doc
@@ -49,7 +49,7 @@ class loginController{
             }
             else {
                 const token = jwt.sign(
-                    {id:user._id, admin:user.admin}
+                    {id:user._id, admin:user.admin, producter : user.producter}
                     ,process.env.JWT_PW,
                     { expiresIn: '1d' })
                 
@@ -124,4 +124,4 @@ class loginController{
     
 }
 
-module.exports = new loginController;
+module.exports = new registerController;

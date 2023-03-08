@@ -9,8 +9,10 @@ const  verifiToken={
             if(err) return res.status(403).json('You are not vailid');
             req.user = user;
             next()
+            
         })
-
+        
+        
     },
     verifyAdmin:(req, res, next)=>{
         verifiToken.verifyUser(req, res, ()=>{
@@ -19,7 +21,16 @@ const  verifiToken={
             }
             else res.status(403).json('You are not admin')
         })
-    }
+    },
+    verifySupplier:(req, res, next)=>{
+        verifiToken.verifySupplier(req, res, ()=>{
+            if (req.user.supplier){
+                next();
+            }
+            else res.status(403).json('You are not supplier')
+        })
+    },
+    
     
 
 }
